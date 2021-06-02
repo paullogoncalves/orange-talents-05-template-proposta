@@ -3,13 +3,14 @@ package br.com.orangetalent5.proposta.domain;
 import java.math.BigDecimal;
 
 import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
 import br.com.orangetalent5.proposta.validation.CPFOrCNPJ;
+import br.com.orangetalent5.proposta.validation.PropostaExistente;
 
+@PropostaExistente
 public class PropostaRequest {
 	@NotEmpty
 	private String nome;
@@ -17,6 +18,7 @@ public class PropostaRequest {
 	@Email
 	private String email;
 	@NotEmpty
+	
 	@CPFOrCNPJ(domainClass = Proposta.class, fieldName = "documento")
 	private String documento;
 	@NotEmpty
@@ -24,7 +26,7 @@ public class PropostaRequest {
 	@NotNull
 	@Positive
 	private BigDecimal salario;
-	
+
 	public PropostaRequest() {
 	}
 
@@ -38,28 +40,14 @@ public class PropostaRequest {
 		this.salario = salario;
 	}
 
-	public String getNome() {
-		return nome;
-	}
-
-	public String getEmail() {
-		return email;
+	public Proposta toEntity() {
+		return new Proposta(nome, email, getDocumento(), endereco, salario);
 	}
 
 	public String getDocumento() {
 		return documento;
 	}
-
-	public String getEndereco() {
-		return endereco;
-	}
-
-	public BigDecimal getSalario() {
-		return salario;
-	}
 	
-	public Proposta toEntity() {
-		return new Proposta(nome, email, documento, endereco, salario);
-	}
-	
+
+
 }
