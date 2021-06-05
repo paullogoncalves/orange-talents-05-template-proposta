@@ -6,6 +6,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
+
+import br.com.orangetalent5.proposta.dto.ConsultaDadosResponse;
 
 @Entity
 public class Proposta {
@@ -18,6 +21,11 @@ public class Proposta {
 	private String documento;
 	private String Endereco;
 	private BigDecimal salario;
+
+	private EstadoProposta statusProposta;
+
+	@OneToOne
+	private CartaoCredito cartao;
 
 	public Proposta() {
 	}
@@ -41,6 +49,22 @@ public class Proposta {
 
 	public String getDocumento() {
 		return documento;
+	}
+
+	public CartaoCredito getCartao() {
+		return cartao;
+	}
+
+	public void atualizaEstadoProposta(ConsultaDadosResponse consultaRestricaoForm) {
+
+		if (consultaRestricaoForm.getResultadoSolicitacao().equals("COM_RESTRICAO")) {
+			this.statusProposta = EstadoProposta.NAO_ELEGIVEL;
+		}
+
+		if (consultaRestricaoForm.getResultadoSolicitacao().equals("SEM_RESTRICAO")) {
+			this.statusProposta = EstadoProposta.ELEGIVEL;
+		}
+
 	}
 
 }

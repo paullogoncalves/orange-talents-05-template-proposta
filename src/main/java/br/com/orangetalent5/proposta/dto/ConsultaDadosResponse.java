@@ -1,16 +1,16 @@
 package br.com.orangetalent5.proposta.dto;
 
-public class SolicitacaoResponse {
+public class ConsultaDadosResponse {
 
 	private String documento;
 	private String nome;
 	private String resultadoSolicitacao;
 	private String idProposta;
 
-	public SolicitacaoResponse() {
+	public ConsultaDadosResponse() {
 	}
 
-	public SolicitacaoResponse(String documento, String nome, String resultadoSolicitacao, String idProposta) {
+	public ConsultaDadosResponse(String documento, String nome, String resultadoSolicitacao, String idProposta) {
 		this.documento = documento;
 		this.nome = nome;
 		this.resultadoSolicitacao = resultadoSolicitacao;

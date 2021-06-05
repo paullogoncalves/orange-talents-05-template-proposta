@@ -1,19 +1,20 @@
 package br.com.orangetalent5.proposta.dto;
 
-public class SolicitacaoRequest {
+import br.com.orangetalent5.proposta.domain.Proposta;
+
+public class ConsultaDadosRequest {
 
 	private String documento;
 	private String nome;
 	private String idProposta;
 	
-	public SolicitacaoRequest() {
+	public ConsultaDadosRequest() {
 	}
 	
-	public SolicitacaoRequest(String documento, String nome, String idProposta) {
-		super();
-		this.documento = documento;
-		this.nome = nome;
-		this.idProposta = idProposta;
+	public ConsultaDadosRequest(Proposta proposta) {
+		this.documento = proposta.getDocumento();
+		this.nome = proposta.getNome();
+		this.idProposta = proposta.getId().toString();
 	}
 
 	public String getDocumento() {
@@ -39,5 +40,6 @@ public class SolicitacaoRequest {
 	public void setIdProposta(String idProposta) {
 		this.idProposta = idProposta;
 	}
+	
 
 }
