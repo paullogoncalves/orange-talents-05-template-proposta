@@ -3,9 +3,11 @@ package br.com.orangetalent5.proposta.domain;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -20,6 +22,9 @@ public class CartaoCredito {
 	private String titular;
 	@OneToOne
 	private Proposta proposta;
+	
+	public CartaoCredito() {
+	}
 
 	public CartaoCredito(String idCartao, LocalDateTime emitidoEm, String titular) {
 		this.idCartao = idCartao;

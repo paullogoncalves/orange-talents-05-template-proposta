@@ -8,7 +8,7 @@ import org.springframework.web.server.ResponseStatusException;
 import feign.Response;
 import feign.codec.ErrorDecoder;
 
-@Component
+//@Component
 public class CustomErrorDecoder implements ErrorDecoder {
 
 

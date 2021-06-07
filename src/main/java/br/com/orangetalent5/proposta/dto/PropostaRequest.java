@@ -8,8 +8,8 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
+import br.com.orangetalent5.proposta.domain.CartaoCredito;
 import br.com.orangetalent5.proposta.domain.Proposta;
-import br.com.orangetalent5.proposta.validation.CPFOrCNPJ;
 
 //@PropostaExistente
 public class PropostaRequest {
@@ -20,7 +20,7 @@ public class PropostaRequest {
 	private String email;
 	@NotEmpty
 
-	@CPFOrCNPJ(domainClass = Proposta.class, fieldName = "documento")
+	//@CPFOrCNPJ(domainClass = Proposta.class, fieldName = "documento")
 	private String documento;
 	@NotEmpty
 	private String endereco;
@@ -61,7 +61,8 @@ public class PropostaRequest {
 	}
 
 	public Proposta toEntity() {
-		return new Proposta(nome, email, documento, endereco, salario);
+		CartaoCredito cartao = new CartaoCredito();
+		return new Proposta(nome, email, documento, endereco, salario, null);
 	}
 
 }

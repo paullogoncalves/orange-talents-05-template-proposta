@@ -3,17 +3,18 @@ package br.com.orangetalent5.proposta.dto;
 import java.time.LocalDateTime;
 
 import br.com.orangetalent5.proposta.domain.CartaoCredito;
+import br.com.orangetalent5.proposta.domain.Proposta;
 
-public class AssociacaoCartaoResponse {
+public class AtrelaCartaoResponse {
 
 	private String id;
 	private LocalDateTime emitidoEm;
 	private String titular;
 
-	public AssociacaoCartaoResponse() {
+	public AtrelaCartaoResponse() {
 	}
 
-	public AssociacaoCartaoResponse(String id, LocalDateTime emitidoEm, String titular) {
+	public AtrelaCartaoResponse(String id, LocalDateTime emitidoEm, String titular) {
 		this.id = id;
 		this.emitidoEm = emitidoEm;
 		this.titular = titular;
@@ -31,8 +32,8 @@ public class AssociacaoCartaoResponse {
 		return titular;
 	}
 	
-	public CartaoCredito toEntity() {
-		return new CartaoCredito(id, emitidoEm, titular);
+	public CartaoCredito toEntity(AtrelaCartaoResponse associacao) {
+		return new CartaoCredito(associacao.getId(), associacao.emitidoEm, associacao.titular);
 	}
 
 }
