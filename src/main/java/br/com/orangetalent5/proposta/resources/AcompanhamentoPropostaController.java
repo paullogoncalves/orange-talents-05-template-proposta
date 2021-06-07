@@ -16,16 +16,18 @@ import br.com.orangetalent5.proposta.repositories.PropostaRepository;
 
 @RestController
 @RequestMapping("/estadoProposta")
-public class AssociacaoCartaoController {
+public class AcompanhamentoPropostaController {
 	
 	@Autowired
 	private PropostaRepository propostaRepo;
 	
-	@GetMapping("/{idProposta}")
-	public ResponseEntity<AcompanhamentoResponse> getCartao(@PathVariable("idProposta") Long idProposta) {
-		System.out.println("passou auiii");
+	@GetMapping("/{id}")
+	public ResponseEntity<AcompanhamentoResponse> getCartao(@PathVariable("id") Long id) {		
+		Optional<Proposta> proposta = propostaRepo.findById(id);
 		
-		Proposta proposta = propostaRepo.findById(idProposta).get();
+		if (proposta.isEmpty()) {
+			return ResponseEntity.notFound().build();
+		}
 		
 		AcompanhamentoResponse response = new AcompanhamentoResponse(proposta);
 

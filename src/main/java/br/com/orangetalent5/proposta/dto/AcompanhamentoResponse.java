@@ -1,5 +1,7 @@
 package br.com.orangetalent5.proposta.dto;
 
+import java.util.Optional;
+
 import br.com.orangetalent5.proposta.domain.EstadoProposta;
 import br.com.orangetalent5.proposta.domain.Proposta;
 
@@ -13,11 +15,11 @@ public class AcompanhamentoResponse {
 	public AcompanhamentoResponse() {
 	}
 	
-	public AcompanhamentoResponse(Proposta proposta) {
-		this.documento = proposta.getDocumento();
-		this.nome = proposta.getNome();
-		this.idProposta = proposta.getId().toString();
-		this.estadoProposta = proposta.getStatusProposta();
+	public AcompanhamentoResponse(Optional<Proposta> proposta) {
+		this.documento = proposta.get().getDocumento();
+		this.nome = proposta.get().getNome();
+		this.idProposta = proposta.get().getId().toString();
+		this.estadoProposta = proposta.get().getStatusProposta();
 	}
 
 	public String getDocumento() {
