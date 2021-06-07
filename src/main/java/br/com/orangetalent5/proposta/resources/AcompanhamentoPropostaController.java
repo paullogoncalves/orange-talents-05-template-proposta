@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.orangetalent5.proposta.domain.Proposta;
 import br.com.orangetalent5.proposta.dto.AcompanhamentoResponse;
-import br.com.orangetalent5.proposta.dto.AtrelaCartaoResponse;
 import br.com.orangetalent5.proposta.repositories.PropostaRepository;
 
 @RestController

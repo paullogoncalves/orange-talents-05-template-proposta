@@ -1,0 +1,28 @@
+version: '3'
+
+services:
+  app_proposta:
+    image: 'proposta:latest'
+    build:
+      context: .
+    container_name: app 
+    ports:
+      - "8080:8080"
+    networks:
+      - production-network
+    depends_on:
+      - db
+  db:
+    image: 'postgres:latest'
+    container_name: db
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postzup
+    ports:
+      - "5432:5432"  
+    networks:
+      - production-network  
+networks:
+  production-network:
+    driver: bridge   
+    

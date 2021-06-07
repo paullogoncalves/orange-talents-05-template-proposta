@@ -6,7 +6,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import br.com.orangetalent5.proposta.dto.ConsultaDadosRequest;
 import br.com.orangetalent5.proposta.dto.ConsultaDadosResponse;
 import br.com.orangetalent5.proposta.dto.PropostaResponse;
 import feign.Headers;
