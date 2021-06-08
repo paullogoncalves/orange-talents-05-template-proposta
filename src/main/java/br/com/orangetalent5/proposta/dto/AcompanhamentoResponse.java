@@ -11,6 +11,7 @@ public class AcompanhamentoResponse {
 	private String nome;
 	private String idProposta;
 	private EstadoProposta estadoProposta;
+	private String numeroCartao;
 	
 	public AcompanhamentoResponse() {
 	}
@@ -20,6 +21,7 @@ public class AcompanhamentoResponse {
 		this.nome = proposta.get().getNome();
 		this.idProposta = proposta.get().getId().toString();
 		this.estadoProposta = proposta.get().getStatusProposta();
+		this.numeroCartao = proposta.get().getCartao().getIdCartao();
 	}
 
 	public String getDocumento() {
@@ -44,5 +46,9 @@ public class AcompanhamentoResponse {
 	
 	public EstadoProposta getEstadoProposta() {
 		return estadoProposta;
+	}
+
+	public String getNumeroCartao() {
+		return numeroCartao;
 	}
 }

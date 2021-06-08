@@ -6,4 +6,5 @@ import br.com.orangetalent5.proposta.domain.CartaoCredito;
 
 public interface CartaoRepository extends JpaRepository<CartaoCredito, Long>{
 
+	CartaoCredito findByIdCartao(String idCartao);
 }
