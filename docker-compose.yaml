@@ -12,17 +12,21 @@ services:
       - production-network
     depends_on:
       - db
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://db:5432/projeto_proposta
+      - SPRING_DATASOURCE_USERNAME=postgres
+      - SPRING_DATASOURCE_PASSWORD=postzup
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
   db:
-    image: 'postgres:latest'
+    image: 'postgres:13'
     container_name: db
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postzup
-    ports:
-      - "5432:5432"  
+      - POSTGRES_DB=projeto_proposta
     networks:
       - production-network  
 networks:
   production-network:
     driver: bridge   
-    
