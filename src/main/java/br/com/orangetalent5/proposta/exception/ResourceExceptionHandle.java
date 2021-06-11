@@ -42,7 +42,7 @@ public class ResourceExceptionHandle {
 	
 	@ExceptionHandler(FeignException.UnprocessableEntity.class)
 	public ResponseEntity<StandardError> documentException(FeignException.UnprocessableEntity e, HttpServletRequest request) {
-		StandardError err = new ValidationError(HttpStatus.UNPROCESSABLE_ENTITY.value(), "FALHA na tentativa de bloqueio", System.currentTimeMillis());
+		StandardError err = new ValidationError(HttpStatus.UNPROCESSABLE_ENTITY.value(), "FALHA na tentativa de bloqueio do cartão", System.currentTimeMillis());
 			
 		return ResponseEntity.status(HttpStatus.UNPROCESSABLE_ENTITY).body(err);
 	}
