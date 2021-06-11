@@ -1,4 +1,4 @@
-package br.com.orangetalent5.proposta;
+package br.com.orangetalent5.proposta.utils;
 
 import java.util.function.Supplier;
 

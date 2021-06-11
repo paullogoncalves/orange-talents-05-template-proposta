@@ -1,4 +1,4 @@
-package br.com.orangetalent5.proposta.client;
+package br.com.orangetalent5.proposta.clientExterno;
 
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.http.MediaType;

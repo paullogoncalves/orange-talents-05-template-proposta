@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 
 import br.com.orangetalent5.proposta.domain.CartaoCredito;
 import br.com.orangetalent5.proposta.domain.Proposta;
+import br.com.orangetalent5.proposta.enums.SituacaoCartao;
 
 public class AtrelaCartaoResponse {
 
@@ -33,7 +34,7 @@ public class AtrelaCartaoResponse {
 	}
 	
 	public CartaoCredito toEntity(AtrelaCartaoResponse associacao) {
-		return new CartaoCredito(associacao.getId(), associacao.emitidoEm, associacao.titular);
+		return new CartaoCredito(associacao.getId(), associacao.emitidoEm, associacao.titular, SituacaoCartao.ATIVO);
 	}
 
 }

@@ -13,9 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import br.com.orangetalent5.proposta.ExecutorTransacao;
-import br.com.orangetalent5.proposta.client.AssociacaoCartaoClient;
-import br.com.orangetalent5.proposta.client.ConsultaDadosClient;
+import br.com.orangetalent5.proposta.clientExterno.AssociacaoCartaoClient;
+import br.com.orangetalent5.proposta.clientExterno.ConsultaDadosClient;
 import br.com.orangetalent5.proposta.domain.CartaoCredito;
 import br.com.orangetalent5.proposta.domain.Proposta;
 import br.com.orangetalent5.proposta.dto.AtrelaCartaoResponse;
@@ -25,6 +24,7 @@ import br.com.orangetalent5.proposta.dto.PropostaResponse;
 import br.com.orangetalent5.proposta.exception.ExistingDocumentException;
 import br.com.orangetalent5.proposta.repositories.CartaoRepository;
 import br.com.orangetalent5.proposta.repositories.PropostaRepository;
+import br.com.orangetalent5.proposta.utils.ExecutorTransacao;
 
 @RestController
 @RequestMapping("/propostas")
@@ -73,6 +73,7 @@ public class PropostaController {
 		CartaoCredito cartaoSalvo = cartaoRepo.save(atrelaCartaoResponse.toEntity(atrelaCartaoResponse));
 
 		propostaNova.atualizaProposta(consultaResponse, cartaoSalvo);
+		
 		executor.atualizaEComita(propostaNova);
 
 		URI enderecoConsulta = builder.path("/propostas/{id}").build(propostaNova.getId());	

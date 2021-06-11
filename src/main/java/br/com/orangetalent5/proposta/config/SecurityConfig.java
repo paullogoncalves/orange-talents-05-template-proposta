@@ -21,7 +21,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    http.headers().httpStrictTransportSecurity().disable();
         http.authorizeRequests(authorizeRequests ->
                         authorizeRequests
-                                .antMatchers("/**").hasAuthority("SCOPE_leitura:read")
+                                .antMatchers("/**").permitAll()//hasAuthority("SCOPE_leitura:read")
                                 .anyRequest().authenticated()
                 )
                 .oauth2ResourceServer(OAuth2ResourceServerConfigurer::jwt)
