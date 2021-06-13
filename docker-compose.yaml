@@ -8,6 +8,7 @@ services:
     container_name: app 
     ports:
       - "8080:8080"
+    restart: always  
     networks:
       - production-network
     depends_on:
@@ -19,15 +20,33 @@ services:
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
       - SPRING_JPA_DATABASE_PLATFORM=org.hibernate.dialect.PostgreSQLDialect
       - SOLICITACAO_ANALISE_ENDPOINT=http://localhost:9999
+      - KEYCLOAK_ISSUER_URI=http://localhost:18080/auth/realms/nosso-cartao
+      - KEYCLOAK_JWKS_URI= http://localhost:18080/auth/realms/nosso-cartao/protocol/openid-connect/certs
   db:
     image: 'postgres:13'
     container_name: db
+    volumes:
+      - ./postgres-data:/var/lib/postgresql/data
+    ports:
+      - 5432:5432
     environment:
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postzup
       - POSTGRES_DB=projeto_proposta
     networks:
       - production-network  
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - prometheus-volume:/etc/prometheus/
+    ports:
+      - 9090:9090 
+    networks:
+      - production-network 
 networks:
   production-network:
-    driver: bridge   
+    driver: bridge
+volumes:
+  prometheus-volume:
+  pgdata: 
+  app_proposta-volume:   

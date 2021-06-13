@@ -22,6 +22,7 @@ import br.com.orangetalent5.proposta.dto.ConsultaDadosResponse;
 import br.com.orangetalent5.proposta.dto.PropostaRequest;
 import br.com.orangetalent5.proposta.dto.PropostaResponse;
 import br.com.orangetalent5.proposta.exception.ExistingDocumentException;
+import br.com.orangetalent5.proposta.metrics.MetricasProposta;
 import br.com.orangetalent5.proposta.repositories.CartaoRepository;
 import br.com.orangetalent5.proposta.repositories.PropostaRepository;
 import br.com.orangetalent5.proposta.utils.ExecutorTransacao;
@@ -43,6 +44,9 @@ public class PropostaController {
 
 	@Autowired
 	private CartaoRepository cartaoRepo;
+	
+	@Autowired
+	private MetricasProposta metricas;
 
 	private PropostaResponse propostaResponse;
 	
@@ -52,6 +56,8 @@ public class PropostaController {
 	@PostMapping
 	@Transactional
 	public ResponseEntity<Void> create(@Valid @RequestBody PropostaRequest request, UriComponentsBuilder builder) {
+		metricas.meuContador();
+		metricas.criarGauge();
 		Proposta propostaNova = request.toEntity();
 		
 		Proposta propostaExistente = propostaRepo.findByDocumento(request.getDocumento());
@@ -75,7 +81,7 @@ public class PropostaController {
 		propostaNova.atualizaProposta(consultaResponse, cartaoSalvo);
 		
 		executor.atualizaEComita(propostaNova);
-
+        
 		URI enderecoConsulta = builder.path("/propostas/{id}").build(propostaNova.getId());	
 		return ResponseEntity.created(enderecoConsulta).build();
 	}
@@ -92,4 +98,6 @@ public class PropostaController {
 
 		return consultaResponse;
 	}
+	
+	
 }

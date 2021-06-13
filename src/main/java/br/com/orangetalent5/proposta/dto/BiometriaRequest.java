@@ -6,9 +6,10 @@ import java.util.Base64;
 import javax.validation.constraints.NotBlank;
 
 import br.com.orangetalent5.proposta.domain.Biometria;
+import br.com.orangetalent5.proposta.validation.Biometric;
 
+@Biometric
 public class BiometriaRequest {
-	
 	
 	@NotBlank
 	private String fingerPrint;
@@ -32,11 +33,7 @@ public class BiometriaRequest {
 		return LocalDateTime.now();
 	}
 	
-	private String firePrintEncoded() {
-		return Base64.getEncoder().encodeToString(this.fingerPrint.getBytes());
-	}
-
 	public Biometria toEntity() {
-		return new Biometria(firePrintEncoded(), getDate());
+		return new Biometria(this.fingerPrint, getDate());
 	}
 }
