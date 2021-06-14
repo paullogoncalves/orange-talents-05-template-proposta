@@ -37,6 +37,9 @@ public class CartaoCredito {
 	@Enumerated(EnumType.STRING)
 	private SituacaoCartao situacaoCartao;
 	
+	@OneToMany(mappedBy = "cartao")
+	private List<AvisoViagem> avisoViagem;
+	
 	public CartaoCredito() {
 	}
 

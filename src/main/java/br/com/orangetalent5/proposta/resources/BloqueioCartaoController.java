@@ -50,7 +50,8 @@ public class BloqueioCartaoController {
 		}
 		
 		Long ipCliente = cartao.getProposta().getId();
-		BloqueioCartao transacaoConcluida = new BloqueioCartao(LocalDateTime.now(), ipCliente, request.getSistemaResponsavel());
+		BloqueioCartao transacaoConcluida = new BloqueioCartao(LocalDateTime.now(), ipCliente,
+				request.getSistemaResponsavel());
 		cartao.setSituacaoCartao(SituacaoCartao.BLOQUEADO);
 		bloqueioRepo.save(transacaoConcluida);
 		
