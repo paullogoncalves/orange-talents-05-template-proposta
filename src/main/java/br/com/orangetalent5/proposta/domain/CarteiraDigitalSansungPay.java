@@ -4,6 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -17,8 +18,8 @@ public class CarteiraDigitalSansungPay {
 	private String email;
 	private String carteiraDigital;
 	private String idCarteira;
-
-	@ManyToOne
+    
+	@OneToOne
 	private CartaoCredito cartao;
 
 	public CarteiraDigitalSansungPay() {

@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import com.twitter.zipkin.thriftjava.Span;
+
 import br.com.orangetalent5.proposta.clientExterno.AssociacaoCartaoClient;
 import br.com.orangetalent5.proposta.clientExterno.ConsultaDadosClient;
 import br.com.orangetalent5.proposta.domain.CartaoCredito;
@@ -26,6 +28,9 @@ import br.com.orangetalent5.proposta.metrics.MetricasProposta;
 import br.com.orangetalent5.proposta.repositories.CartaoRepository;
 import br.com.orangetalent5.proposta.repositories.PropostaRepository;
 import br.com.orangetalent5.proposta.utils.ExecutorTransacao;
+import io.opentracing.Tracer;
+
+
 
 @RestController
 @RequestMapping("/propostas")
@@ -53,11 +58,19 @@ public class PropostaController {
 	@Autowired
 	private ExecutorTransacao executor;
 
+	@Autowired
+	private Tracer tracer;
+	
 	@PostMapping
 	@Transactional
 	public ResponseEntity<Void> create(@Valid @RequestBody PropostaRequest request, UriComponentsBuilder builder) {
+		
 		metricas.meuContador();
 		metricas.criarGauge();
+		
+//		Span activeSpan = tracer.activeSpan();
+//		activeSpan.setTag("user.email", "paulo@gmail.com");
+		
 		Proposta propostaNova = request.toEntity();
 		
 		Proposta propostaExistente = propostaRepo.findByDocumento(request.getDocumento());
