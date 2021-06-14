@@ -40,6 +40,9 @@ public class CartaoCredito {
 	@OneToMany(mappedBy = "cartao")
 	private List<AvisoViagem> avisoViagem;
 	
+	@OneToOne
+	private CarteiraDigital carteira;
+	
 	public CartaoCredito() {
 	}
 
