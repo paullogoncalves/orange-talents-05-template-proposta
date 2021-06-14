@@ -4,17 +4,21 @@ import java.time.LocalDate;
 
 public class AvisoViagemResponse {
 
-	private String avisoViagem;
+	private String destino;
 	
-	private LocalDate terminoViagem;
-
-	public String getAvisoViagem() {
-		return avisoViagem;
+	private LocalDate validoAte;
+	
+	public AvisoViagemResponse(AvisoViagemRequest request) {
+		this.destino = request.getDestinoViagem();
+		this.validoAte = request.getTerminoViagem();
 	}
 
-	public LocalDate getTerminoViagem() {
-		return terminoViagem;
+	public String getDestino() {
+		return destino;
 	}
-	
-	
+
+	public LocalDate getValidoAte() {
+		return validoAte;
+	}
+
 }
