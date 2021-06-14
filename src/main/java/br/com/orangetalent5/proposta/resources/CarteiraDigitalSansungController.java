@@ -13,40 +13,35 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import br.com.orangetalent5.proposta.clientExterno.CarteiraDigitalClient;
 import br.com.orangetalent5.proposta.domain.CartaoCredito;
-import br.com.orangetalent5.proposta.domain.CarteiraDigital;
-import br.com.orangetalent5.proposta.dto.CarteiraDigitalRequest;
+import br.com.orangetalent5.proposta.domain.CarteiraDigitalSansungPay;
 import br.com.orangetalent5.proposta.dto.CarteiraDigitalResponseClient;
+import br.com.orangetalent5.proposta.dto.CarteiraDigitalSansungPayRequest;
 import br.com.orangetalent5.proposta.repositories.CartaoRepository;
-import br.com.orangetalent5.proposta.repositories.CarteiraDigitalRepository;
+import br.com.orangetalent5.proposta.repositories.CarteiraDigitalSansungRepository;
 
 @RestController
 @RequestMapping("/")
-public class CarteiraDigitalController {
+public class CarteiraDigitalSansungController {
 
 	@Autowired
 	private CartaoRepository cartaoRepo;
 	
 	@Autowired
-	private CarteiraDigitalRepository carteiraRepo;
+	private CarteiraDigitalSansungRepository carteiraRepo;
 	
 	@Autowired
 	private CarteiraDigitalClient carteiraClient;
 	
-	@PostMapping("{id}/carteiras")
-	public ResponseEntity<?> create(@PathVariable(value = "id") String id, @RequestBody CarteiraDigitalRequest request,
+	@PostMapping("{id}/sansung")
+	public ResponseEntity<?> create(@PathVariable(value = "id") String id, @RequestBody CarteiraDigitalSansungPayRequest request,
 			UriComponentsBuilder uriBuilder) {
 		
 		CartaoCredito cartao = cartaoRepo.findByIdCartao(id);
 
-		CarteiraDigital jaExisteCarteiraAssociada = carteiraRepo.findByCartaoId(cartao.getId());
-		
-		if (jaExisteCarteiraAssociada != null)	{
-			return ResponseEntity.unprocessableEntity().build();
-		}
-				
-		CarteiraDigitalResponseClient response = carteiraClient.associaCarteiraAndCartao(id, request);
+	    System.out.println("asss");	
+		CarteiraDigitalResponseClient response = carteiraClient.associaCarteiraSansungAndCartao(id, request);
 
-		CarteiraDigital carteiraFinal = request.toEntity(response.getId(), cartao);
+		CarteiraDigitalSansungPay carteiraFinal = request.toEntity(response.getId(), cartao);
 		
 		carteiraRepo.save(carteiraFinal);
 		URI uri = uriBuilder.path("/{id}/carteiras").build(carteiraFinal.getId());

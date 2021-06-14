@@ -43,6 +43,9 @@ public class CartaoCredito {
 	@OneToOne
 	private CarteiraDigital carteira;
 	
+	@OneToMany
+	private CarteiraDigitalSansungPay sansungPay;
+	
 	public CartaoCredito() {
 	}
 
