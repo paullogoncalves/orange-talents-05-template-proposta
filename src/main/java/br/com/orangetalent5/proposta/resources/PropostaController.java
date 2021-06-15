@@ -13,10 +13,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.util.UriComponentsBuilder;
 
-import com.twitter.zipkin.thriftjava.Span;
-
 import br.com.orangetalent5.proposta.clientExterno.AssociacaoCartaoClient;
 import br.com.orangetalent5.proposta.clientExterno.ConsultaDadosClient;
+import br.com.orangetalent5.proposta.config.Encrypter;
 import br.com.orangetalent5.proposta.domain.CartaoCredito;
 import br.com.orangetalent5.proposta.domain.Proposta;
 import br.com.orangetalent5.proposta.dto.AtrelaCartaoResponse;
@@ -61,17 +60,19 @@ public class PropostaController {
 	@Autowired
 	private Tracer tracer;
 	
+	@Autowired
+	private Encrypter encripter;
+	
 	@PostMapping
 	@Transactional
 	public ResponseEntity<Void> create(@Valid @RequestBody PropostaRequest request, UriComponentsBuilder builder) {
 		
 		metricas.meuContador();
-		metricas.criarGauge();
-		
 //		Span activeSpan = tracer.activeSpan();
 //		activeSpan.setTag("user.email", "paulo@gmail.com");
 		
-		Proposta propostaNova = request.toEntity();
+	    String documentoEncryptado = encripter.encrypt(request.getDocumento());
+		Proposta propostaNova = request.toEntity(documentoEncryptado);
 		
 		Proposta propostaExistente = propostaRepo.findByDocumento(request.getDocumento());
 		if (propostaExistente != null) {

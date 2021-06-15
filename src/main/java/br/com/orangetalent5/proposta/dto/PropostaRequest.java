@@ -8,7 +8,6 @@ import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Positive;
 
-import br.com.orangetalent5.proposta.domain.CartaoCredito;
 import br.com.orangetalent5.proposta.domain.Proposta;
 import br.com.orangetalent5.proposta.validation.CPFOrCNPJ;
 
@@ -29,6 +28,7 @@ public class PropostaRequest {
 	@Positive
 	private BigDecimal salario;
 
+	
 	public PropostaRequest() {
 	}
 
@@ -60,10 +60,12 @@ public class PropostaRequest {
 	public String getDocumento() {
 		return documento;
 	}
-
-	public Proposta toEntity() {
-		CartaoCredito cartao = new CartaoCredito();
-		return new Proposta(nome, email, documento, endereco, salario, null);
+	 
+	public Proposta toEntity(String documento) {
+		
+		return new Proposta(nome, email, documento , endereco, salario, null);
 	}
 
+
+	
 }
